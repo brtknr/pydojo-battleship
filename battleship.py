@@ -69,12 +69,7 @@ class Game(object):
         self.board = board
 
     def __repr__(self):
-        r = ''
-        for row in self.board:
-            for c in row:
-                r += str(c)
-            r += '\n'
-        return r[:-1]
+        return '\n'.join([''.join([str(col) for col in row]) for row in self.board])
 
     def to_json(self):
         b = []
