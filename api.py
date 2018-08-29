@@ -18,7 +18,7 @@ class HelloWorld(Resource):
         y = int(request.form['y']) % main.m
         main.game.board[x][y].hit = True
         print(main.game)
-        pass
+        return str(main.game)
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=80)
