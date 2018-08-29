@@ -29,9 +29,11 @@ class Cell(object):
             return '[ ]'
 
 class Game(object):
-    def __init__(self, n, m, ships):
+    def __init__(self, n=n, m=m, ships=ships):
         board = []
         n_cells = n*m
+        self.n = n
+        self.m = m
         for i in range(n):
             column = []
             for j in range(m):
@@ -63,8 +65,6 @@ class Game(object):
                         if orient == 1:
                             board[i][(j+k)%m].has_ship = True
                     break
-            print (length)
-
                         
         self.board = board
 

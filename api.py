@@ -7,15 +7,22 @@ api = Api(app)
 
 import battleship as bs
 
-@api.route('/game')
+games = dict()
+
+@api.route('/game/<game_id>/')
 class HelloWorld(Resource):
-    def get(self):
+    def get(self, game_id):
+        print(game_id)
+        game = games.get(game_id, False)
+        if not game:
+            game = bs.Game()
+            games[game_id] = game
         x = request.args.get('x',False)
         y = request.args.get('y',False)
         if x and y:
-            bs.game.board[int(x)%bs.n][int(y)%bs.m].hit = True
-        print(bs.game)
-        return {'board': bs.game.to_json()}
+            game.board[int(x)%game.n][int(y)%game.m].hit = True
+        print(game)
+        return {'board': game.to_json()}
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=80)
